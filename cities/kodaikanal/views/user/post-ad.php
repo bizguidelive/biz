@@ -175,6 +175,9 @@ $planMapJson = json_encode(array_map(function($p){ return ['name'=>$p['name'],'p
         <div class="fg plan-fields plan-premium plan-pro"><label>Website</label><input type="url" name="website" class="fi" placeholder="https://..."></div>
       </div>
       <div class="fg"><label>Address</label><input type="text" name="address" class="fi"></div>
+      <div class="fg"><label>Google Map Embed <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</span></label>
+        <textarea name="map_embed" class="fi" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'></textarea>
+      </div>
       <div class="fg"><label>Short Description</label><textarea name="short_description" class="fi" rows="3" maxlength="300"></textarea></div>
     </div>
 
@@ -219,7 +222,7 @@ $planMapJson = json_encode(array_map(function($p){ return ['name'=>$p['name'],'p
         </div>
         <button type="button" onclick="addServiceRow()" style="font-size:0.78rem;color:var(--primary);background:none;border:none;cursor:pointer;padding:0"><i class="bi bi-plus-circle me-1"></i>Add another service</button>
       </div>
-      <div class="fg"><label>Top Banner Image</label>
+      <div class="fg"><label>Top Banner Image <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">— Recommended Size: 382 px × 132 px</span></label>
         <div class="upload-area" onclick="document.getElementById('bannerI').click()">
           <i class="bi bi-cloud-upload" style="font-size:1.8rem;color:var(--primary);display:block;margin-bottom:6px"></i>
           <p style="font-size:0.78rem;color:var(--text-muted)">Click to upload (max 5MB)</p>

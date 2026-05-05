@@ -67,6 +67,10 @@
           <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($listing['address'] ?? '') ?>">
         </div>
         <div class="col-12">
+          <label class="form-label fw-600">Google Map Embed <small class="text-muted fw-normal">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</small></label>
+          <textarea name="map_embed" class="form-control" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'><?= htmlspecialchars($listing['map_embed'] ?? '') ?></textarea>
+        </div>
+        <div class="col-12">
           <label class="form-label fw-600">Short Description</label>
           <textarea name="short_description" class="form-control" rows="3"><?= htmlspecialchars($listing['short_description'] ?? '') ?></textarea>
         </div>
@@ -121,10 +125,10 @@
           <input type="url" name="youtube_url" class="form-control" value="<?= htmlspecialchars($listing['youtube_url'] ?? '') ?>">
         </div>
         <div class="col-12">
-          <label class="form-label fw-600">Top Banner <small class="text-muted">(leave blank to keep current)</small></label>
+          <label class="form-label fw-600">Top Banner <small class="text-muted" style="font-weight:400">— Recommended Size: 382 px × 132 px (leave blank to keep current)</small></label>
           <input type="file" name="top_banner" class="form-control" accept="image/*">
           <?php if($listing['top_banner']): ?>
-            <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing['top_banner']) ?>" class="mt-2 rounded" style="max-height:80px">
+            <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing['top_banner']) ?>" class="mt-2 rounded" style="width:382px;max-width:100%;height:132px;object-fit:cover;border:1px solid #dee2e6">
           <?php endif ?>
         </div>
       </div>

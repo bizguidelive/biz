@@ -129,4 +129,29 @@ class Helper
         $c = $colors[$status] ?? 'secondary';
         return '<span class="badge bg-' . $c . '">' . ucfirst($status) . '</span>';
     }
+
+    // Extract embed URL from Google Maps iframe or direct URL
+    public static function mapEmbedUrl(string $input): string
+    {
+        $input = trim($input);
+        if (empty($input)) return '';
+
+        // Extract src from iframe first (handles full iframe HTML paste)
+        if (preg_match('/<iframe[^>]*src=["\']([^"\']+)["\'][^>]*>/i', $input, $matches)) {
+            return $matches[1];
+        }
+
+        // If it's already a direct embed URL
+        if (str_contains($input, 'google.com/maps/embed')) {
+            return $input;
+        }
+
+        // If it's a share URL, try to convert to embed
+        if (str_contains($input, 'google.com/maps/') && !str_contains($input, '/embed')) {
+            $embedUrl = preg_replace('/google\.com\/maps\//', 'google.com/maps/embed/', $input);
+            return $embedUrl;
+        }
+
+        return $input; // Return as-is if can't parse
+    }
 }

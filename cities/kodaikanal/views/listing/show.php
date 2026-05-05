@@ -6,7 +6,8 @@ $extraCss = <<<'ENDCSS'
 .listing-wrap{max-width:1050px;margin:0 auto;padding:24px 16px}
 .listing-grid{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:start}
 .l-hero{background:linear-gradient(135deg,#2d1b69,var(--primary));border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
-.l-banner{width:100%;height:180px;object-fit:cover}
+.l-banner-wrap{width:100%;height:160px;overflow:hidden}
+.l-banner{width:100%;height:160px;object-fit:cover;object-position:center;display:block}
 .l-hero-body{padding:18px}
 .l-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;margin-bottom:4px}
 .l-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
@@ -58,9 +59,9 @@ require CITY_DIR . "/views/layout/header.php";
 <div>
   <div class="l-hero">
     <?php if($listing["top_banner"] && in_array($listing["plan_level"],["premium","pro"])): ?>
-    <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing["top_banner"]) ?>" class="l-banner" alt="">
+    <div class="l-banner-wrap"><img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing["top_banner"]) ?>" class="l-banner" alt=""></div>
     <?php elseif(!empty($images) && in_array($listing["plan_level"],["premium","pro"])): ?>
-    <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($images[0]["filename"]) ?>" class="l-banner" alt="">
+    <div class="l-banner-wrap"><img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($images[0]["filename"]) ?>" class="l-banner" alt=""></div>
     <?php endif ?>
     <div class="l-hero-body">
       <div class="l-badges">
@@ -92,6 +93,20 @@ require CITY_DIR . "/views/layout/header.php";
     <?php if($listing["email"]): ?><div class="drow"><span class="dlbl">Email</span><span><?= htmlspecialchars($listing["email"]) ?></span></div><?php endif ?>
     <?php if($listing["website"] && in_array($listing["plan_level"],["premium","pro"])): ?><div class="drow"><span class="dlbl">Website</span><span><a href="<?= htmlspecialchars($listing["website"]) ?>" target="_blank" style="color:var(--primary)"><?= htmlspecialchars($listing["website"]) ?></a></span></div><?php endif ?>
   </div>
+
+  <?php if(!empty($listing["map_embed"])): ?>
+  <?php
+    $mapSrc = $listing["map_embed"];
+    if (preg_match('/<iframe[^>]*src=["\']([^"\']+)["\'][^>]*>/i', $mapSrc, $mapM)) {
+        $mapSrc = $mapM[1];
+    }
+  ?>
+  <div class="icard"><h3><i class="bi bi-geo-alt-fill" style="color:var(--maroon)"></i>Location</h3>
+    <div style="position:relative;padding-bottom:56.25%;border-radius:9px;overflow:hidden">
+      <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="<?= htmlspecialchars($mapSrc) ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+  <?php endif ?>
 
   <?php if(!empty($images) && in_array($listing["plan_level"],["premium","pro"])): ?>
   <div class="icard"><h3><i class="bi bi-images" style="color:var(--primary)"></i>Photos</h3>

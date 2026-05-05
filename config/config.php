@@ -26,14 +26,14 @@ if (isset($_SERVER['HTTP_HOST'])) {
         define('IS_SUBDOMAIN', false);
         define('SESSION_NAME', 'bizguide_session');
 
-    // Local: localhost/nyxburgh/Bizguide
+    // Local: localhost/biz
     } else {
-        define('BASE_URL',  'http://localhost/nyxburgh/Biz');
+        define('BASE_URL',  'http://localhost/biz');
         define('IS_SUBDOMAIN', false);
         define('SESSION_NAME', 'bizguide_local');
     }
 } else {
-    define('BASE_URL',  'http://localhost/nyxburgh/Biz');
+    define('BASE_URL',  'http://localhost/biz');
     define('IS_SUBDOMAIN', false);
     define('SESSION_NAME', 'bizguide_local');
 }

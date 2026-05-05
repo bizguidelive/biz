@@ -37,6 +37,13 @@
           </div>
           <div class="col-12"><label class="text-muted d-block">Address</label><div><?= htmlspecialchars($listing['address'] ?? '—') ?></div></div>
           <div class="col-12"><label class="text-muted d-block">Description</label><div><?= htmlspecialchars($listing['short_description'] ?? '—') ?></div></div>
+          <?php if (!empty($listing['map_embed'])): ?>
+            <div class="col-12"><label class="text-muted d-block">Google Map</label>
+              <div style="position:relative;padding-bottom:40%;border-radius:6px;overflow:hidden;border:1px solid #e5e7eb;margin-top:6px">
+                <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="<?= htmlspecialchars($listing['map_embed']) ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              </div>
+            </div>
+          <?php endif ?>
           <?php if ($listing['youtube_url']): ?>
             <div class="col-12"><label class="text-muted d-block">YouTube</label><div><?= htmlspecialchars($listing['youtube_url']) ?></div></div>
           <?php endif ?>

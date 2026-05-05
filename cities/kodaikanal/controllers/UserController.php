@@ -22,7 +22,8 @@ class UserController extends CityBaseController
         $payments = Database::fetchAll("SELECT p.*, pl.label FROM payments p LEFT JOIN plans pl ON p.plan_id = pl.id WHERE p.user_id = ? ORDER BY p.created_at DESC", [$user['id']]);
         $plans    = Database::fetchAll("SELECT * FROM plans WHERE name != 'free' AND status = 'active' ORDER BY sort_order");
         $csrf     = $this->csrfToken();
-        $this->view('user.dashboard', compact('user','listing','reviews','payments','plans','csrf'));
+        $cityUrl  = CITY_URL;
+        $this->view('user.dashboard', compact('user','listing','reviews','payments','plans','csrf','cityUrl'));
     }
 
     public function postAd(): void
@@ -46,7 +47,8 @@ class UserController extends CityBaseController
             'plan_id'
         );
         $csrf = $this->csrfToken();
-        $this->view('user.post-ad', compact('user','categories','subcategories','keywords','allPlans','plans','confirmedPlanIds','csrf'));
+        $cityUrl = CITY_URL;
+        $this->view('user.post-ad', compact('user','categories','subcategories','keywords','allPlans','plans','confirmedPlanIds','csrf','cityUrl'));
     }
 
     public function updateProfile(): void
@@ -132,8 +134,8 @@ class UserController extends CityBaseController
         }
 
         Database::execute(
-            "INSERT INTO business_listings (user_id,city_id,category_id,plan_level,business_name,address,phone,whatsapp,email,short_description,website,facebook,instagram,youtube_url,top_banner,slug,status,created_at)
-             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())",
+            "INSERT INTO business_listings (user_id,city_id,category_id,plan_level,business_name,address,phone,whatsapp,email,short_description,website,map_embed,facebook,instagram,youtube_url,top_banner,slug,status,created_at)
+             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())",
             [$user['id'],CITY_ID,(int)$this->input('category_id')?:null,$planLevel,$businessName,
              $this->sanitize($this->input('address','')),
              $this->sanitize($this->input('phone',$user['phone'])),
@@ -141,6 +143,7 @@ class UserController extends CityBaseController
              $this->sanitize($this->input('email',$user['email']??'')),
              $this->sanitize($this->input('short_description','')),
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('website','')) : '',
+             Helper::mapEmbedUrl($this->input('map_embed','')),
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('facebook','')) : '',
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('instagram','')) : '',
              $planLevel === 'pro' ? $this->sanitize($this->input('youtube_url','')) : '',
@@ -226,7 +229,8 @@ class UserController extends CityBaseController
         $keywords      = Database::fetchAll("SELECT k.*, c.name AS cat_name FROM keywords k LEFT JOIN categories c ON k.category_id = c.id WHERE k.status = 'active' ORDER BY k.name");
         $selKwIds      = array_column(Database::fetchAll("SELECT keyword_id FROM listing_keywords WHERE listing_id = ?", [$listing['id']]), 'keyword_id');
         $csrf          = $this->csrfToken();
-        $this->view('user.edit-ad', compact('user','listing','categories','keywords','selKwIds','csrf','currentImages'));
+        $cityUrl       = CITY_URL;
+        $this->view('user.edit-ad', compact('user','listing','categories','keywords','selKwIds','csrf','currentImages','cityUrl'));
     }
 
     public function updateAd(): void
@@ -253,12 +257,12 @@ class UserController extends CityBaseController
         }
 
         Database::execute(
-            "UPDATE business_listings SET category_id=?, business_name=?, address=?, phone=?, whatsapp=?, email=?, short_description=?, website=?, facebook=?, instagram=?, youtube_url=?, top_banner=?, status='pending', updated_at=NOW() WHERE id=?",
+            "UPDATE business_listings SET category_id=?, business_name=?, address=?, phone=?, whatsapp=?, email=?, short_description=?, website=?, map_embed=?, facebook=?, instagram=?, youtube_url=?, top_banner=?, status='pending', updated_at=NOW() WHERE id=?",
             [(int)$this->input('category_id') ?: null,
              $this->sanitize($this->input('business_name','')), $this->sanitize($this->input('address','')),
              $this->sanitize($this->input('phone','')), $this->sanitize($this->input('whatsapp','')),
              $this->sanitize($this->input('email','')), $this->sanitize($this->input('short_description','')),
-             $website, $facebook, $instagram, $youtube, $banner, $listing['id']]
+             $website, Helper::mapEmbedUrl($this->input('map_embed','')), $facebook, $instagram, $youtube, $banner, $listing['id']]
         );
         Database::execute("DELETE FROM listing_keywords WHERE listing_id = ?", [$listing['id']]);
         if (in_array($planLevel, ['premium', 'pro'], true)) {
@@ -287,7 +291,8 @@ class UserController extends CityBaseController
         $user  = $this->currentUser();
         $plans = Database::fetchAll("SELECT * FROM plans WHERE name != 'free' AND status = 'active' ORDER BY sort_order");
         $csrf  = $this->csrfToken();
-        $this->view('user.upgrade', compact('user','plans','csrf'));
+        $cityUrl = CITY_URL;
+        $this->view('user.upgrade', compact('user','plans','csrf','cityUrl'));
     }
 
     public function submitUpgrade(): void

@@ -43,6 +43,9 @@ require CITY_DIR . "/views/layout/header.php";
         <div class="fg"><label>Category</label><select name="category_id" class="fi"><?php foreach($categories as $c):?><option value="<?= $c["id"] ?>" <?= $listing["category_id"]==$c["id"]?"selected":"" ?>><?= htmlspecialchars($c["name"]) ?></option><?php endforeach ?></select></div>
       </div>
       <div class="fg"><label>Address</label><input type="text" name="address" class="fi" value="<?= htmlspecialchars($listing["address"]??"") ?>"></div>
+      <div class="fg"><label>Google Map Embed <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</span></label>
+        <textarea name="map_embed" class="fi" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'><?= htmlspecialchars($listing["map_embed"]??"") ?></textarea>
+      </div>
       <div class="fg"><label>Short Description</label><textarea name="short_description" class="fi" rows="3"><?= htmlspecialchars($listing["short_description"]??"") ?></textarea></div>
     </div>
     <?php if(in_array(strtolower($listing["plan_level"]??""),['premium','pro'])): ?>
@@ -81,10 +84,10 @@ require CITY_DIR . "/views/layout/header.php";
     <div class="form-card">
       <h3><i class="bi bi-trophy" style="color:var(--green)"></i>Pro Fields</h3>
       <div class="fg"><label>YouTube URL</label><input type="url" name="youtube_url" class="fi" value="<?= htmlspecialchars($listing["youtube_url"]??"") ?>"></div>
-      <div class="fg"><label>Top Banner Image</label>
+      <div class="fg"><label>Top Banner Image <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">— Recommended Size: 382 px × 132 px</span></label>
         <?php if($listing["top_banner"]): ?>
           <div style="margin-bottom:8px">
-            <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing["top_banner"]) ?>" style="height:60px;border-radius:6px;border:1.5px solid var(--border)">
+            <img src="<?= BASE_URL ?>/assets/uploads/listings/<?= htmlspecialchars($listing["top_banner"]) ?>" style="width:382px;max-width:100%;height:132px;object-fit:cover;border-radius:6px;border:1.5px solid var(--border)">
           </div>
         <?php endif ?>
         <div class="upload-area" onclick="document.getElementById('bannerI').click()" style="border:2px dashed var(--border);border-radius:9px;padding:16px;text-align:center;cursor:pointer;transition:border-color .2s">

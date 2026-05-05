@@ -13,19 +13,24 @@ class HomeController extends CityBaseController
              LEFT JOIN users u ON bl.user_id = u.id
              LEFT JOIN plans pl ON u.plan_id = pl.id
              WHERE cat.status = 'active'
-             GROUP BY cat.id ORDER BY cat.sort_order, cat.name", [$cityId]
+             GROUP BY cat.id
+             HAVING listing_count > 0
+             ORDER BY cat.sort_order, cat.name", [$cityId]
         );
         $banners = Database::fetchAll(
-            "SELECT bl.*, ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
+            "SELECT bl.*, (SELECT filename FROM listing_images WHERE listing_id = bl.id ORDER BY sort_order LIMIT 1) AS first_image,
+             ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
              FROM business_listings bl
              LEFT JOIN users u ON bl.user_id = u.id
              LEFT JOIN plans pl ON u.plan_id = pl.id
              LEFT JOIN listing_reviews r ON r.listing_id = bl.id AND r.status = 'approved'
-             WHERE bl.city_id = ? AND bl.plan_level = 'pro' AND bl.status = 'approved' AND COALESCE(pl.name, 'free') != 'free'
-             GROUP BY bl.id ORDER BY bl.published_at DESC LIMIT 5", [$cityId]
+             WHERE bl.city_id = ? AND bl.plan_level IN ('pro','PRO') AND bl.status = 'approved' AND COALESCE(pl.name, 'free') != 'free'
+             GROUP BY bl.id ORDER BY bl.published_at DESC LIMIT 6", [$cityId]
         );
         $featured = Database::fetchAll(
-            "SELECT bl.*, cat.name AS cat_name, ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
+            "SELECT bl.*, cat.name AS cat_name,
+             (SELECT filename FROM listing_images WHERE listing_id = bl.id ORDER BY sort_order LIMIT 1) AS first_image,
+             ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
              FROM business_listings bl
              LEFT JOIN users u ON bl.user_id = u.id
              LEFT JOIN plans pl ON u.plan_id = pl.id
@@ -45,8 +50,8 @@ class HomeController extends CityBaseController
         );
         $freeUsers = Database::fetchAll(
             "SELECT u.name, u.profession, u.phone
-             FROM users u JOIN plans pl ON u.plan_id = pl.id
-             WHERE pl.name = 'free' AND u.city_id = ? AND u.status = 'active'
+             FROM users u LEFT JOIN plans pl ON u.plan_id = pl.id
+             WHERE (pl.name = 'free' OR u.plan_id IS NULL) AND u.city_id = ? AND u.status = 'active'
              ORDER BY u.created_at DESC LIMIT 50", [$cityId]
         );
         $this->view('home.index', compact('categories','banners','featured','basics','freeUsers'));

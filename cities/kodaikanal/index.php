@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 if (!defined('BASE_PATH')) define('BASE_PATH', dirname(__DIR__, 2));
 
 require_once BASE_PATH . '/config/config.php';

@@ -132,8 +132,8 @@ class UserController extends CityBaseController
         }
 
         Database::execute(
-            "INSERT INTO business_listings (user_id,city_id,category_id,plan_level,business_name,address,phone,whatsapp,email,short_description,website,facebook,instagram,youtube_url,top_banner,slug,status,created_at)
-             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())",
+            "INSERT INTO business_listings (user_id,city_id,category_id,plan_level,business_name,address,phone,whatsapp,email,short_description,website,map_embed,facebook,instagram,youtube_url,top_banner,slug,status,created_at)
+             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())",
             [$user['id'],CITY_ID,(int)$this->input('category_id')?:null,$planLevel,$businessName,
              $this->sanitize($this->input('address','')),
              $this->sanitize($this->input('phone',$user['phone'])),
@@ -141,6 +141,7 @@ class UserController extends CityBaseController
              $this->sanitize($this->input('email',$user['email']??'')),
              $this->sanitize($this->input('short_description','')),
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('website','')) : '',
+             Helper::mapEmbedUrl($this->input('map_embed','')),
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('facebook','')) : '',
              in_array($planLevel,['premium','pro']) ? $this->sanitize($this->input('instagram','')) : '',
              $planLevel === 'pro' ? $this->sanitize($this->input('youtube_url','')) : '',
@@ -246,12 +247,12 @@ class UserController extends CityBaseController
         $youtube   = $planLevel === 'pro' ? $this->sanitize($this->input('youtube_url', '')) : '';
 
         Database::execute(
-            "UPDATE business_listings SET category_id=?, business_name=?, address=?, phone=?, whatsapp=?, email=?, short_description=?, website=?, facebook=?, instagram=?, youtube_url=?, status='pending', updated_at=NOW() WHERE id=?",
+            "UPDATE business_listings SET category_id=?, business_name=?, address=?, phone=?, whatsapp=?, email=?, short_description=?, website=?, map_embed=?, facebook=?, instagram=?, youtube_url=?, status='pending', updated_at=NOW() WHERE id=?",
             [(int)$this->input('category_id') ?: null,
              $this->sanitize($this->input('business_name','')), $this->sanitize($this->input('address','')),
              $this->sanitize($this->input('phone','')), $this->sanitize($this->input('whatsapp','')),
              $this->sanitize($this->input('email','')), $this->sanitize($this->input('short_description','')),
-             $website, $facebook, $instagram, $youtube, $listing['id']]
+             $website, Helper::mapEmbedUrl($this->input('map_embed','')), $facebook, $instagram, $youtube, $listing['id']]
         );
         Database::execute("DELETE FROM listing_keywords WHERE listing_id = ?", [$listing['id']]);
         if (in_array($planLevel, ['premium', 'pro'], true)) {

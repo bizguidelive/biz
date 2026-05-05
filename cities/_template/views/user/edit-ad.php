@@ -43,6 +43,9 @@ require CITY_DIR . "/views/layout/header.php";
         <div class="fg"><label>Category</label><select name="category_id" class="fi"><?php foreach($categories as $c):?><option value="<?= $c["id"] ?>" <?= $listing["category_id"]==$c["id"]?"selected":"" ?>><?= htmlspecialchars($c["name"]) ?></option><?php endforeach ?></select></div>
       </div>
       <div class="fg"><label>Address</label><input type="text" name="address" class="fi" value="<?= htmlspecialchars($listing["address"]??"") ?>"></div>
+      <div class="fg"><label>Google Map Embed <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</span></label>
+        <textarea name="map_embed" class="fi" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'><?= htmlspecialchars($listing["map_embed"]??"") ?></textarea>
+      </div>
       <div class="fg"><label>Short Description</label><textarea name="short_description" class="fi" rows="3"><?= htmlspecialchars($listing["short_description"]??"") ?></textarea></div>
     </div>
     <?php if(in_array(strtolower($listing["plan_level"]??""),['premium','pro'])): ?>

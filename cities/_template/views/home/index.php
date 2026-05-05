@@ -53,23 +53,22 @@ $extraCss = '<style>
 .banner-arrow.prev{left:8px}.banner-arrow.next{right:8px}
 .banner-slider-wrap{position:relative;margin-bottom:18px;overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow)}
 .banner-slider-track{display:flex;transition:transform 0.55s cubic-bezier(0.77,0,0.18,1);will-change:transform}
-.promo-banner{min-width:100%;width:100%;border-radius:0;display:flex;align-items:stretch;min-height:150px;text-decoration:none;color:inherit;position:relative;flex-shrink:0;background:#fff}
-.promo-banner-accent{width:7px;flex-shrink:0}
-.promo-banner.banner-maroon .promo-banner-accent{background:linear-gradient(180deg,var(--maroon),#c0392b)}
-.promo-banner.banner-teal .promo-banner-accent{background:linear-gradient(180deg,var(--teal),#1a6e7a)}
-.promo-banner.banner-amber .promo-banner-accent{background:linear-gradient(180deg,var(--amber),#92400e)}
-.promo-banner-img{width:190px;flex-shrink:0;overflow:hidden;background:linear-gradient(135deg,var(--sand-dark),var(--sand));display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:2rem}
-.promo-banner-img img{width:100%;height:100%;object-fit:cover;display:block}
-.promo-banner-body{flex:1;padding:16px;display:flex;flex-direction:column;justify-content:center;background:#fff;gap:4px;min-width:0}
-.promo-banner-top{display:flex;align-items:center;gap:8px;margin-bottom:2px}
-.promo-banner-top h3{font-family:"Syne",sans-serif;font-weight:800;font-size:1rem;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.promo-banner p{font-size:0.79rem;color:var(--text-muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.promo-banner-meta{display:flex;align-items:center;gap:14px;margin-top:6px;flex-wrap:wrap}
-.promo-banner-meta span{font-size:0.74rem;font-weight:500;color:var(--text-mid);display:flex;align-items:center;gap:4px}
-.promo-banner-cta{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 18px;gap:8px;background:var(--sand-light)}
-.promo-cta-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:40px;font-size:0.78rem;font-weight:700;white-space:nowrap;transition:var(--transition)}
+.promo-banner{min-width:100%;width:100%;border-radius:0;display:flex;align-items:stretch;height:132px;text-decoration:none;color:inherit;position:relative;flex-shrink:0;background:#fff}
+.promo-banner-details{flex:0 0 22%;max-width:22%;min-width:160px;padding:10px 12px 10px 16px;display:flex;flex-direction:column;justify-content:space-between;background:#fff;gap:3px;position:relative;box-sizing:border-box}
+.promo-banner-details::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
+.promo-banner.banner-maroon .promo-banner-details::before{background:linear-gradient(180deg,var(--maroon),#c0392b)}
+.promo-banner.banner-teal .promo-banner-details::before{background:linear-gradient(180deg,var(--teal),#1a6e7a)}
+.promo-banner.banner-amber .promo-banner-details::before{background:linear-gradient(180deg,var(--amber),#92400e)}
+.promo-banner-img{flex:1 1 0;min-width:0;height:132px;overflow:hidden;background:linear-gradient(135deg,var(--sand-dark),var(--sand));display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:2rem}
+.promo-banner-img img{width:100%;height:132px;object-fit:cover;object-position:center;display:block}
+.promo-banner-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:2px}
+.promo-banner-top h3{font-family:"Syne",sans-serif;font-weight:800;font-size:0.92rem;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+.promo-banner p{font-size:0.74rem;color:var(--text-muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.promo-banner-meta{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin-top:5px}
+.promo-banner-meta span{font-size:0.7rem;font-weight:500;color:var(--text-mid);display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.promo-cta-rating{display:flex;align-items:center;gap:3px;font-size:0.72rem;color:var(--amber);font-weight:600;margin-top:4px}
+.promo-cta-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:40px;font-size:0.72rem;font-weight:700;white-space:nowrap;transition:var(--transition);margin-top:6px;align-self:flex-start}
 .banner-maroon .promo-cta-btn{background:var(--maroon);color:#fff}.banner-teal .promo-cta-btn{background:var(--teal);color:#fff}.banner-amber .promo-cta-btn{background:var(--amber);color:#fff}
-.promo-cta-rating{display:flex;align-items:center;gap:3px;font-size:0.75rem;color:var(--amber);font-weight:600}
 .banner-controls{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;z-index:2}
 .banner-dot{width:7px;height:7px;border-radius:50%;background:rgba(124,58,237,0.25);cursor:pointer;transition:all .25s;border:none;padding:0}
 .banner-dot.active{background:var(--purple);width:20px;border-radius:4px}
@@ -113,8 +112,8 @@ $extraCss = '<style>
 .btn-upgrade{display:inline-block;padding:8px 20px;background:#fff;color:var(--primary);border-radius:40px;font-size:0.82rem;font-weight:700;transition:var(--transition)}
 .btn-upgrade:hover{background:var(--sand);transform:scale(1.04)}
 .sidebar{display:flex;flex-direction:column;gap:14px}
-@media(max-width:768px){.main-grid{grid-template-columns:1fr}.sidebar{display:none}.cat-grid{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:1.5rem}.promo-banner-img{width:96px}.promo-banner-cta{display:none}}
-@media(max-width:480px){.ads-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:repeat(3,1fr);gap:8px}.slider-card{flex:0 0 170px}.promo-banner{min-height:128px}.promo-banner-img{width:82px}}
+@media(max-width:768px){.main-grid{grid-template-columns:1fr}.sidebar{display:none}.cat-grid{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:1.5rem}.promo-banner{flex-direction:column;min-height:auto}.promo-banner-details,.promo-banner-img{flex:0 0 auto;max-width:100%;width:100%}.promo-banner-img{height:200px}.promo-banner-details::before{width:100%;height:4px;bottom:auto}.promo-banner-meta{flex-direction:row;flex-wrap:wrap;gap:10px}}
+@media(max-width:480px){.ads-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:repeat(3,1fr);gap:8px}.slider-card{flex:0 0 170px}.promo-banner-img{height:170px}}
 </style>';
 require CITY_DIR . '/views/layout/header.php';
 $catIcons = ['Restaurants'=>'bi-shop','Hotels & Stays'=>'bi-building','Shopping'=>'bi-bag-heart','Health & Clinic'=>'bi-heart-pulse','Services'=>'bi-tools','Education'=>'bi-mortarboard','Automobile'=>'bi-car-front','Photography'=>'bi-camera'];
@@ -156,25 +155,22 @@ $listingImage = function(array $ad): string {
     <div class="banner-slider-track" id="bannerTrack">
       <?php $bcols=['banner-maroon','banner-teal','banner-amber']; foreach($banners as $bi=>$b): ?>
       <a href="<?= $cityUrl ?>/listing/<?= htmlspecialchars($b['slug']) ?>" class="promo-banner <?= $bcols[$bi%count($bcols)] ?>">
-        <div class="promo-banner-accent"></div>
-        <div class="promo-banner-img"><img src="<?= $listingImage($b) ?>" alt="<?= htmlspecialchars($b['business_name']) ?>"></div>
-        <div class="promo-banner-body">
+        <div class="promo-banner-details">
           <div class="promo-banner-top">
             <span class="plan-tag plan-pro">PRO</span>
             <h3><?= htmlspecialchars($b['business_name']) ?></h3>
           </div>
-          <p><?= htmlspecialchars(Helper::truncate($b['short_description'] ?? '', 120)) ?></p>
+          <p><?= htmlspecialchars(Helper::truncate($b['short_description'] ?? '', 80)) ?></p>
           <div class="promo-banner-meta">
             <?php if(!empty($b['address'])): ?><span><i class="bi bi-geo-alt-fill" style="color:var(--maroon)"></i> <?= htmlspecialchars($b['address']) ?></span><?php endif ?>
             <?php if(!empty($b['phone'])): ?><span><i class="bi bi-telephone-fill" style="color:var(--maroon)"></i> <?= htmlspecialchars($b['phone']) ?></span><?php endif ?>
           </div>
-        </div>
-        <div class="promo-banner-cta">
           <?php if($b['avg_rating']): ?>
           <div class="promo-cta-rating"><i class="bi bi-star-fill"></i> <?= $b['avg_rating'] ?> <span style="color:var(--text-muted);font-weight:400">(<?= $b['review_count'] ?>)</span></div>
           <?php endif ?>
           <div class="promo-cta-btn"><i class="bi bi-arrow-right"></i> View Ad</div>
         </div>
+        <div class="promo-banner-img"><img src="<?= $listingImage($b) ?>" alt="<?= htmlspecialchars($b['business_name']) ?>"></div>
       </a>
       <?php endforeach ?>
     </div>

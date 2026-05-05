@@ -97,6 +97,10 @@
           <input type="text" name="address" class="form-control">
         </div>
         <div class="col-12">
+          <label class="form-label fw-600">Google Map Embed <small class="text-muted fw-normal">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</small></label>
+          <textarea name="map_embed" class="form-control" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'></textarea>
+        </div>
+        <div class="col-12">
           <label class="form-label fw-600">Short Description</label>
           <textarea name="short_description" class="form-control" rows="3" maxlength="300"></textarea>
         </div>
@@ -150,7 +154,7 @@
           <input type="url" name="youtube_url" class="form-control" placeholder="https://youtube.com/watch?v=...">
         </div>
         <div class="col-12">
-          <label class="form-label fw-600">Top Banner Image</label>
+          <label class="form-label fw-600">Top Banner Image <small class="text-muted" style="font-weight:400">— Recommended Size: 382 px × 132 px</small></label>
           <input type="file" name="top_banner" class="form-control" accept="image/*">
         </div>
       </div>

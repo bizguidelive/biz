@@ -175,6 +175,9 @@ $planMapJson = json_encode(array_map(function($p){ return ['name'=>$p['name'],'p
         <div class="fg plan-fields plan-premium plan-pro"><label>Website</label><input type="url" name="website" class="fi" placeholder="https://..."></div>
       </div>
       <div class="fg"><label>Address</label><input type="text" name="address" class="fi"></div>
+      <div class="fg"><label>Google Map Embed <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem">(Optional — paste the iframe code or src URL from Google Maps "Share &rarr; Embed a map")</span></label>
+        <textarea name="map_embed" class="fi" rows="2" placeholder='&lt;iframe src="https://www.google.com/maps/embed?pb=..." ...&gt;&lt;/iframe&gt; or just the URL'></textarea>
+      </div>
       <div class="fg"><label>Short Description</label><textarea name="short_description" class="fi" rows="3" maxlength="300"></textarea></div>
     </div>
 
