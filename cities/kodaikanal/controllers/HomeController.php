@@ -66,7 +66,9 @@ class HomeController extends CityBaseController
         $w = ["bl.city_id = ?", "bl.status = 'approved'"]; $p = [$cityId];
         if ($q)     { $w[] = "(bl.business_name LIKE ? OR bl.short_description LIKE ? OR bl.address LIKE ?)"; $s = "%$q%"; array_push($p,$s,$s,$s); }
         if ($catId) { $w[] = "bl.category_id = ?"; $p[] = $catId; }
-        $sql = "SELECT bl.*, cat.name AS cat_name, ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
+        $sql = "SELECT bl.*, cat.name AS cat_name,
+                       (SELECT filename FROM listing_images WHERE listing_id = bl.id ORDER BY sort_order LIMIT 1) AS first_image,
+                       ROUND(AVG(r.rating),1) AS avg_rating, COUNT(r.id) AS review_count
                 FROM business_listings bl
                 LEFT JOIN users u ON bl.user_id = u.id
                 LEFT JOIN plans pl ON u.plan_id = pl.id
@@ -74,7 +76,7 @@ class HomeController extends CityBaseController
                 LEFT JOIN listing_reviews r ON r.listing_id = bl.id AND r.status = 'approved'
                 WHERE " . implode(' AND ', $w) . " AND COALESCE(pl.name, 'free') != 'free'
                 GROUP BY bl.id ORDER BY bl.plan_level DESC, bl.published_at DESC";
-        $pager      = Database::paginate($sql, $p, $page, 15);
+        $pager      = Database::paginate($sql, $p, $page, 10);
         $categories = Database::fetchAll("SELECT id, name FROM categories WHERE status = 'active' ORDER BY name");
         $this->view('search.index', compact('pager','q','catId','categories'));
     }

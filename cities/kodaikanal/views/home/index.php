@@ -11,7 +11,9 @@ $extraCss = '<style>
 .hero-search{display:flex;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.15);max-width:480px;margin:0 auto}
 .hero-search input{flex:1;padding:14px 16px;border:none;font-size:0.9rem;font-family:inherit;outline:none}
 .hero-search button{padding:14px 20px;background:var(--primary);color:#fff;border:none;font-size:1rem;cursor:pointer}
-.main-wrap{max-width:1150px;margin:0 auto;padding:24px 16px}
+.main-wrap{max-width:1150px;margin:0 auto;padding:24px 16px 0}
+.site-footer-main{margin-top:14px!important}
+#topPicksSection .ads-grid{margin-bottom:0}
 .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px}
 .main-grid>div:first-child{min-width:0}
 .section-title{font-family:"Syne",sans-serif;font-weight:700;font-size:1rem;color:var(--text-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px}
@@ -112,7 +114,7 @@ $extraCss = '<style>
 .btn-upgrade{display:inline-block;padding:8px 20px;background:#fff;color:var(--primary);border-radius:40px;font-size:0.82rem;font-weight:700;transition:var(--transition)}
 .btn-upgrade:hover{background:var(--sand);transform:scale(1.04)}
 .sidebar{display:flex;flex-direction:column;gap:14px}
-@media(max-width:768px){.main-grid{grid-template-columns:1fr}.sidebar{display:none}.cat-grid{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:1.5rem}.promo-banner{flex-direction:column;height:auto}.promo-banner-details{flex:0 0 auto;max-width:100%;width:100%;min-width:0;min-height:190px}.promo-banner-img{flex:0 0 auto;max-width:100%;width:100%;height:160px}.promo-banner-details::before{width:100%;height:4px;bottom:auto}.promo-banner-meta{flex-direction:row;flex-wrap:wrap;gap:8px}}
+@media(max-width:768px){body{padding-bottom:calc(var(--footer-h) + 14px + env(safe-area-inset-bottom))}.main-grid{grid-template-columns:1fr}.sidebar{display:none}.cat-grid{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:1.5rem}.promo-banner{flex-direction:column;height:auto}.promo-banner-details{flex:0 0 auto;max-width:100%;width:100%;min-width:0;min-height:190px}.promo-banner-img{flex:0 0 auto;max-width:100%;width:100%;height:160px}.promo-banner-details::before{width:100%;height:4px;bottom:auto}.promo-banner-meta{flex-direction:row;flex-wrap:wrap;gap:8px}}
 @media(max-width:480px){.ads-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:repeat(3,1fr);gap:8px}.slider-card{flex:0 0 170px}.promo-banner-img{height:140px}.promo-banner-details{min-height:200px}}
 </style>';
 require CITY_DIR . '/views/layout/header.php';
