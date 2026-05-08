@@ -38,8 +38,20 @@ $extraCss = <<<'ENDCSS'
 .page-link:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px);box-shadow:var(--shadow-hover)}
 .page-item.active .page-link{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 8px 24px rgba(124,58,237,0.25)}
 .page-item.disabled .page-link{opacity:.45;pointer-events:none;box-shadow:none}
+@media(min-width:769px){
+  .site-header{padding:0 24px 0 16px;justify-content:flex-start;gap:14px}
+  .site-header .header-logo{flex:0 0 246px}
+  .site-header .header-nav{display:none}
+  .site-header .header-actions{margin-left:auto}
+  .search-bar{position:fixed;top:0;left:276px;right:210px;height:var(--header-h);z-index:910;padding:12px 20px;background:rgba(250,246,240,.97);border-left:none;border-right:none}
+  .search-inner{max-width:none;height:100%;margin:0;flex-wrap:nowrap;gap:10px}
+  .s-inp-wrap{height:44px;min-width:0}
+  .s-select{width:150px;flex:0 0 150px;font-size:0.76rem}
+  .results-wrap{padding-top:28px}
+}
 @media(max-width:768px){.results-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.result-thumb{height:104px}.result-body{padding:12px}.result-name{font-size:0.86rem}.result-meta{font-size:0.72rem}.result-call{font-size:0.8rem}.result-action{width:28px;height:28px;font-size:0.82rem}}
-@media(max-width:480px){.pagination-wrap{margin-top:18px}.pagination{gap:5px}.page-link{min-width:34px;height:34px;padding:0 10px;font-size:0.76rem;border-radius:9px}.results-grid{gap:9px}.result-thumb{height:86px}.result-body{padding:10px}.result-plan{font-size:0.58rem;margin-bottom:5px}.result-name{font-size:0.78rem;margin-bottom:4px}.result-meta{font-size:0.66rem;margin-bottom:6px}.result-call{font-size:0.72rem}.result-actions{gap:5px}.result-action{width:25px;height:25px;font-size:0.74rem}.search-inner{gap:8px}.s-select{width:100%}}
+@media(max-width:768px){.search-bar{position:relative;top:auto;padding:8px 10px}.search-inner{max-width:none;flex-wrap:nowrap;gap:10px}.s-inp-wrap{min-width:0}.s-select{width:150px;flex:0 0 150px}.results-wrap{padding-top:8px}}
+@media(max-width:480px){.pagination-wrap{margin-top:18px}.pagination{gap:5px}.page-link{min-width:34px;height:34px;padding:0 10px;font-size:0.76rem;border-radius:9px}.results-grid{gap:9px}.result-thumb{height:86px}.result-body{padding:10px}.result-plan{font-size:0.58rem;margin-bottom:5px}.result-name{font-size:0.78rem;margin-bottom:4px}.result-meta{font-size:0.66rem;margin-bottom:6px}.result-call{font-size:0.72rem}.result-actions{gap:5px}.result-action{width:25px;height:25px;font-size:0.74rem}.search-inner{gap:8px}.s-select{width:145px;flex-basis:145px}}
 </style>
 ENDCSS;
 require CITY_DIR . "/views/layout/header.php";

@@ -138,7 +138,11 @@ img{max-width:100%;height:auto}
         <a href="<?= $cityUrl ?>/dashboard" class="btn-post" style="background:var(--green)"><i class="bi bi-grid-1x2"></i> My Ads</a>
       <?php endif ?>
     <?php else: ?>
-      <a href="<?= $cityUrl ?>/login" class="btn-login">Login</a>
+      <?php if(($activePage ?? '') === 'search'): ?>
+        <a href="<?= $cityUrl ?>" class="btn-login">Home</a>
+      <?php else: ?>
+        <a href="<?= $cityUrl ?>/login" class="btn-login">Login</a>
+      <?php endif ?>
       <a href="<?= $cityUrl ?>/login" class="btn-post"><i class="bi bi-plus-lg"></i> Post Ad</a>
     <?php endif ?>
   </div>

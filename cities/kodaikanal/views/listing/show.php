@@ -94,20 +94,6 @@ require CITY_DIR . "/views/layout/header.php";
     <?php if($listing["website"] && in_array($listing["plan_level"],["premium","pro"])): ?><div class="drow"><span class="dlbl">Website</span><span><a href="<?= htmlspecialchars($listing["website"]) ?>" target="_blank" style="color:var(--primary)"><?= htmlspecialchars($listing["website"]) ?></a></span></div><?php endif ?>
   </div>
 
-  <?php if(!empty($listing["map_embed"])): ?>
-  <?php
-    $mapSrc = $listing["map_embed"];
-    if (preg_match('/<iframe[^>]*src=["\']([^"\']+)["\'][^>]*>/i', $mapSrc, $mapM)) {
-        $mapSrc = $mapM[1];
-    }
-  ?>
-  <div class="icard"><h3><i class="bi bi-geo-alt-fill" style="color:var(--maroon)"></i>Location</h3>
-    <div style="position:relative;padding-bottom:56.25%;border-radius:9px;overflow:hidden">
-      <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="<?= htmlspecialchars($mapSrc) ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    </div>
-  </div>
-  <?php endif ?>
-
   <?php if(!empty($images) && in_array($listing["plan_level"],["premium","pro"])): ?>
   <div class="icard"><h3><i class="bi bi-images" style="color:var(--primary)"></i>Photos</h3>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px">
@@ -227,6 +213,7 @@ require CITY_DIR . "/views/layout/header.php";
       <?php if($listing["facebook"]): ?><a href="<?= htmlspecialchars($listing["facebook"]) ?>" target="_blank" style="width:36px;height:36px;border-radius:9px;background:#1877f2;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-facebook"></i></a><?php endif ?>
       <?php if($listing["instagram"]): ?><a href="<?= htmlspecialchars($listing["instagram"]) ?>" target="_blank" style="width:36px;height:36px;border-radius:9px;background:linear-gradient(45deg,#f09433,#dc2743);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-instagram"></i></a><?php endif ?>
       <a href="https://api.whatsapp.com/send?text=<?= urlencode($listing["business_name"].' - '.$listingUrl) ?>" target="_blank" style="width:36px;height:36px;border-radius:9px;background:#16a34a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-whatsapp"></i></a>
+      <?php if($listing["address"]): ?><a href="https://maps.google.com/maps?q=<?= urlencode($listing["address"]) ?>" target="_blank" style="width:36px;height:36px;border-radius:9px;background:#8B4513;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-geo-alt-fill"></i></a><?php endif ?>
     </div>
     <?php endif ?>
   </div>
