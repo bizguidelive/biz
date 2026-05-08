@@ -1,5 +1,5 @@
 </main>
-<footer style="background:linear-gradient(135deg,#2d1b69,#1e1245);color:rgba(255,255,255,0.7);padding:40px 20px 24px;margin-top:40px">
+<footer class="site-footer-main" style="background:linear-gradient(135deg,#2d1b69,#1e1245);color:rgba(255,255,255,0.7);padding:40px 20px 24px;margin-top:40px">
   <div style="max-width:1100px;margin:0 auto">
     <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px;margin-bottom:28px">
       <div>

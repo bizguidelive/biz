@@ -83,13 +83,25 @@ img{max-width:100%;height:auto}
 .flash-s{background:#d1fae5;color:#065f46;border-left:4px solid #10b981}
 .flash-e{background:#fee2e2;color:#991b1b;border-left:4px solid #ef4444}
 .flash-i{background:#e0f2fe;color:#0c4a6e;border-left:4px solid #0ea5e9}
-@media(max-width:768px){
+/* @media(max-width:768px){
   body{padding-bottom:calc(var(--footer-h)+env(safe-area-inset-bottom))}
   .mobile-bottom-bar{display:flex}
   .header-nav,.header-actions,.desktop-only{display:none!important}
   .mobile-center-logo{display:flex}
   .site-header{justify-content:center}
   .flash-area{right:8px;left:8px;max-width:100%}
+  
+} */
+@media(max-width:768px){
+  body{padding-bottom:calc(var(--footer-h) + 24px + env(safe-area-inset-bottom))}
+  .mobile-bottom-bar{display:flex}
+  .header-nav,.header-actions,.desktop-only{display:none!important}
+  .mobile-center-logo{display:flex}
+  .site-header{justify-content:center}
+  .flash-area{right:8px;left:8px;max-width:100%}
+}
+@media(max-width:768px){
+  .site-footer-main{display:none!important}
 }
 </style>
 <?= $extraCss ?? '' ?>
